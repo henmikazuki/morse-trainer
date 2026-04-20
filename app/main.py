@@ -17,5 +17,4 @@ def start():
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
     """トップページの表示"""
-    questions = start()["questions"]
-    return templates.TemplateResponse(request, "index.html", {"questions": questions})
+    return templates.TemplateResponse(request, "index.html")
