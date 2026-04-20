@@ -1,5 +1,5 @@
 import random
-from morse_data import MORSE
+from .morse_data import MORSE
 
 
 def generate_quiz_set(count=10):
