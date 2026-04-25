@@ -1,4 +1,5 @@
 let currentAnswer = "";
+let correctCount = 0;
 
 async function loadQuestion() {
   const res = await fetch("/api/start");
@@ -16,8 +17,10 @@ function submitAnswer() {
   const input = document.getElementById("answer").value;
 
   if (input.toUpperCase() === currentAnswer) {
+    correctCount++;
     document.getElementById("result").innerText = "正解！";
   } else {
     document.getElementById("result").innerText = "不正解: " + currentAnswer;
   }
+  document.getElementById("correctCount").innerText = correctCount;
 }
