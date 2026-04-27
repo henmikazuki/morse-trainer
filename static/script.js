@@ -3,12 +3,15 @@ let currentIndex = 0;
 let score = 0;
 let currentAnswer = "";
 
+let startFlag = 0;
+
 async function loadQuestion() {
   const res = await fetch("/api/start");
   const data = await res.json();
   questions = data.questions;
 
   const q = questions[0];
+  console.log(questions);
 
   currentAnswer = q.answer;
 
@@ -36,8 +39,9 @@ function nextQuestion() {
 }
 
 document.getElementById("questionButton").addEventListener("click", () => {
-  if (document.getElementById("questionButton").innerText === "スタート") {
+  if (startFlag === 0) {
     loadQuestion();
+    startFlag = 1;
   } else {
     nextQuestion();
   }
@@ -53,6 +57,7 @@ function submitAnswer() {
     document.getElementById("result").innerText = "不正解: " + currentAnswer;
   }
   document.getElementById("correctCount").innerText = score;
+  nextQuestion();
 }
 
 document.getElementById("ansButton").addEventListener("click", submitAnswer);
@@ -60,4 +65,9 @@ document.getElementById("ansButton").addEventListener("click", submitAnswer);
 function showResult() {
   document.getElementById("question").innerText =
     `終了！ ${score} / ${questions.length}`;
+  document.getElementById("questionButton").innerText = "もう一回";
+  // リセット用の関数を別途作成予定
+  currentIndex = 0;
+  score = 0;
+  startFlag = 0;
 }
