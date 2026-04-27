@@ -15,7 +15,7 @@ async function loadQuestion() {
 
   currentAnswer = q.answer;
 
-  document.getElementById("questionButton").innerText = "次の問題";
+  document.getElementById("questionButton").style.display = "none";
   document.getElementById("question").innerText = q.question;
 }
 
@@ -69,6 +69,7 @@ function showResult() {
     document.getElementById("question").innerText =
       `終了！ ${score} / ${questions.length}`;
   }
+  document.getElementById("questionButton").style.display = "block";
   document.getElementById("questionButton").innerText = "もう一回";
   // リセット用の関数を別途作成予定
   currentIndex = 0;
