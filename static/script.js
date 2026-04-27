@@ -63,8 +63,12 @@ function submitAnswer() {
 document.getElementById("ansButton").addEventListener("click", submitAnswer);
 
 function showResult() {
-  document.getElementById("question").innerText =
-    `終了！ ${score} / ${questions.length}`;
+  if (score === questions.length) {
+    document.getElementById("result").innerText = "全問正解！おめでとう！";
+  } else {
+    document.getElementById("question").innerText =
+      `終了！ ${score} / ${questions.length}`;
+  }
   document.getElementById("questionButton").innerText = "もう一回";
   // リセット用の関数を別途作成予定
   currentIndex = 0;
