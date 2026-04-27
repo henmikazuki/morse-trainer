@@ -24,3 +24,6 @@ function submitAnswer() {
   }
   document.getElementById("correctCount").innerText = correctCount;
 }
+
+document.getElementById("ansButton").addEventListener("click", submitAnswer);
+
