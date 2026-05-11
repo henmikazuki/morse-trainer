@@ -31,8 +31,6 @@ function showQuestion() {
   currentAnswer = q.answer;
 
   document.getElementById("question").innerText = q.question;
-  document.getElementById("answer").value = "";
-  document.getElementById("result").innerText = "";
 }
 
 function nextQuestion() {
