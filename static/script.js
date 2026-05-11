@@ -52,6 +52,7 @@ function submitAnswer() {
 
   if (input.toUpperCase() === currentAnswer) {
     score++;
+    document.getElementById("result").style.color = "green";
     document.getElementById("result").innerText = "正解！";
   } else {
     document.getElementById("result").innerText = "不正解: " + currentAnswer;
