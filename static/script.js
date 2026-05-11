@@ -19,6 +19,7 @@ async function loadQuestion() {
 
   currentAnswer = q.answer;
 
+  document.querySelector(".question_set").style.display = "block";
   document.getElementById("questionButton").style.display = "none";
   document.getElementById("question").innerText = q.question;
   document.getElementById("questionCount").innerText = questionCount + 1;
@@ -82,6 +83,8 @@ document.getElementById("answer").addEventListener("keydown", (e) => {
 });
 
 function showResult() {
+  document.querySelector(".question_set").style.display = "none";
+
   if (score === questions.length) {
     document.getElementById("result").innerText = "全問正解！おめでとう！";
   } else {

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/style.css" />
     <title>モールス信号クイズ</title>
   </head>
   <body>
@@ -13,8 +14,10 @@
     <div>正解数: <span id="correctCount">0</span></div>
     <button id="questionButton">スタート</button>
     <div id="question"></div>
-    <input id="answer" />
-    <button id="ansButton">回答</button>
+    <div class="question_set">
+      <input id="answer" />
+      <button id="ansButton">回答</button>
+    </div>
     <div id="result"></div>
     <script src="/static/script.js"></script>
   </body>
