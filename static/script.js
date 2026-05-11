@@ -55,6 +55,7 @@ function submitAnswer() {
     document.getElementById("result").style.color = "green";
     document.getElementById("result").innerText = "正解！";
   } else {
+    document.getElementById("result").style.color = "red";
     document.getElementById("result").innerText = "不正解: " + currentAnswer;
   }
   document.getElementById("correctCount").innerText = score;
