@@ -57,6 +57,7 @@ function submitAnswer() {
     document.getElementById("result").innerText = "不正解: " + currentAnswer;
   }
   document.getElementById("correctCount").innerText = score;
+  document.getElementById("answer").value = "";
   nextQuestion();
 }
 
