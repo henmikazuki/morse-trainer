@@ -63,6 +63,14 @@ function submitAnswer() {
 
 document.getElementById("ansButton").addEventListener("click", submitAnswer);
 
+document.getElementById("answer").addEventListener("keydown", (e) => {
+  if (
+    e.key === "Enter" &&
+    document.getElementById("answer").value.trim() !== ""
+  )
+    submitAnswer();
+});
+
 function showResult() {
   if (score === questions.length) {
     document.getElementById("result").innerText = "全問正解！おめでとう！";
