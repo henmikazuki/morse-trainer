@@ -5,10 +5,14 @@ let currentAnswer = "";
 
 let startFlag = 0;
 
+let totalCount = 0;
+let questionCount = 0;
+
 async function loadQuestion() {
   const res = await fetch("/api/start");
   const data = await res.json();
   questions = data.questions;
+  totalCount = questions.length;
 
   const q = questions[0];
   console.log(questions);
@@ -17,6 +21,8 @@ async function loadQuestion() {
 
   document.getElementById("questionButton").style.display = "none";
   document.getElementById("question").innerText = q.question;
+  document.getElementById("questionCount").innerText = questionCount + 1;
+  document.getElementById("totalCount").innerText = totalCount;
 }
 
 function showQuestion() {
@@ -32,6 +38,8 @@ function nextQuestion() {
   currentIndex++;
 
   if (currentIndex < questions.length) {
+    questionCount++;
+    document.getElementById("questionCount").innerText = questionCount + 1;
     showQuestion();
   } else {
     showResult();
@@ -86,4 +94,5 @@ function showResult() {
   currentIndex = 0;
   score = 0;
   startFlag = 0;
+  questionCount = 0;
 }
