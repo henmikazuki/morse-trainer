@@ -1,6 +1,9 @@
-let questions = [];
-let currentIndex = 0;
-let score = 0;
+let gameState = {
+  score: 0,
+  currentIndex: 0,
+  questions: [],
+};
+
 let currentAnswer = "";
 
 let startFlag = 0;
@@ -11,34 +14,37 @@ let questionCount = 0;
 async function loadQuestion() {
   const res = await fetch("/api/start");
   const data = await res.json();
-  questions = data.questions;
-  totalCount = questions.length;
+  gameState.questions = data.questions;
+  totalCount = gameState.questions.length;
 
-  const q = questions[0];
-  console.log(questions);
+  const q = gameState.questions[0];
+  // TODO: デバッグ用。削除予定
+  console.log(gameState.questions);
 
   currentAnswer = q.answer;
 
+  document.querySelector(".question_count_container").style.display = "block";
   document.querySelector(".question_set").style.display = "block";
   document.getElementById("questionButton").style.display = "none";
   document.getElementById("question").innerText = q.question;
-  document.getElementById("questionCount").innerText = questionCount + 1;
+  document.getElementById("questionCount").innerText =
+    gameState.currentIndex + 1;
   document.getElementById("totalCount").innerText = totalCount;
 }
 
 function showQuestion() {
-  const q = questions[currentIndex];
+  const q = gameState.questions[gameState.currentIndex];
   currentAnswer = q.answer;
 
   document.getElementById("question").innerText = q.question;
 }
 
 function nextQuestion() {
-  currentIndex++;
+  gameState.currentIndex++;
 
-  if (currentIndex < questions.length) {
-    questionCount++;
-    document.getElementById("questionCount").innerText = questionCount + 1;
+  if (gameState.currentIndex < gameState.questions.length) {
+    document.getElementById("questionCount").innerText =
+      gameState.currentIndex + 1;
     showQuestion();
   } else {
     showResult();
@@ -58,14 +64,14 @@ function submitAnswer() {
   const input = document.getElementById("answer").value;
 
   if (input.toUpperCase() === currentAnswer) {
-    score++;
+    gameState.score++;
     document.getElementById("result").style.color = "green";
     document.getElementById("result").innerText = "正解！";
   } else {
     document.getElementById("result").style.color = "red";
     document.getElementById("result").innerText = "不正解: " + currentAnswer;
   }
-  document.getElementById("correctCount").innerText = score;
+  document.getElementById("correctCount").innerText = gameState.score;
   document.getElementById("answer").value = "";
   nextQuestion();
 }
@@ -83,11 +89,11 @@ document.getElementById("answer").addEventListener("keydown", (e) => {
 function showResult() {
   document.querySelector(".question_set").style.display = "none";
 
-  if (score === questions.length) {
+  if (gameState.score === gameState.questions.length) {
     document.getElementById("result").innerText = "全問正解！おめでとう！";
   } else {
     document.getElementById("question").innerText =
-      `終了！ ${score} / ${questions.length}`;
+      `終了！ ${gameState.score} / ${gameState.questions.length}`;
   }
   document.getElementById("questionButton").style.display = "block";
   document.getElementById("questionButton").innerText = "もう一回";
