@@ -12,11 +12,11 @@
       第<span id="questionCount">0</span>問 (全<span id="totalCount">0</span>問)
     </div>
     <div>正解数: <span id="correctCount">0</span></div>
-    <button id="questionButton">スタート</button>
+    <button id="questionButton" onclick="setPlayingMode()">スタート</button>
     <div id="question"></div>
     <div class="question_set">
-      <input id="answer" />
-      <button id="ansButton">回答</button>
+      <input id="answer" onkeydown="setResultMode()" />
+      <button id="ansButton" onclick="setResultMode()">回答</button>
     </div>
     <div id="result"></div>
     <script src="/static/script.js"></script>

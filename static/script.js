@@ -9,7 +9,6 @@ let currentAnswer = "";
 let startFlag = 0;
 
 let totalCount = 0;
-let questionCount = 0;
 
 async function loadQuestion() {
   const res = await fetch("/api/start");
@@ -32,6 +31,27 @@ async function loadQuestion() {
   document.getElementById("totalCount").innerText = totalCount;
 }
 
+function setPlayingMode() {
+  if (startFlag === 0) {
+    loadQuestion();
+    startFlag = 1;
+  } else {
+    nextQuestion();
+  }
+}
+
+function setResultMode() {
+  document.getElementById("ansButton").addEventListener("click", submitAnswer);
+
+  document.getElementById("answer").addEventListener("keydown", (e) => {
+    if (
+      e.key === "Enter" &&
+      document.getElementById("answer").value.trim() !== ""
+    )
+      submitAnswer();
+  });
+}
+
 function showQuestion() {
   const q = gameState.questions[gameState.currentIndex];
   currentAnswer = q.answer;
@@ -51,15 +71,6 @@ function nextQuestion() {
   }
 }
 
-document.getElementById("questionButton").addEventListener("click", () => {
-  if (startFlag === 0) {
-    loadQuestion();
-    startFlag = 1;
-  } else {
-    nextQuestion();
-  }
-});
-
 function submitAnswer() {
   const input = document.getElementById("answer").value;
 
@@ -75,16 +86,6 @@ function submitAnswer() {
   document.getElementById("answer").value = "";
   nextQuestion();
 }
-
-document.getElementById("ansButton").addEventListener("click", submitAnswer);
-
-document.getElementById("answer").addEventListener("keydown", (e) => {
-  if (
-    e.key === "Enter" &&
-    document.getElementById("answer").value.trim() !== ""
-  )
-    submitAnswer();
-});
 
 function showResult() {
   document.querySelector(".question_set").style.display = "none";
