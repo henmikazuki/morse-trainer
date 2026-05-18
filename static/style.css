@@ -1,3 +1,7 @@
+.question_count_container {
+  display: none;
+}
+
 .question_set {
   display: none;
 }

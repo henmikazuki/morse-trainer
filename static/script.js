@@ -10,6 +10,7 @@ let startFlag = 0;
 
 let totalCount = 0;
 
+// TODO: 既知の不具合。もう1度スタートするときに、正解数が持ち越されて表示されている。リセットできるように変更予定
 async function loadQuestion() {
   const res = await fetch("/api/start");
   const data = await res.json();
@@ -29,6 +30,26 @@ async function loadQuestion() {
   document.getElementById("questionCount").innerText =
     gameState.currentIndex + 1;
   document.getElementById("totalCount").innerText = totalCount;
+}
+
+function resetGame() {
+  gameState.currentIndex = 0;
+  gameState.score = 0;
+  startFlag = 0;
+  document.querySelector(".question_count_container").style.display = "none";
+  document.getElementById("correctCount").innerText = "0";
+  document.getElementById("question").innerText = "";
+  document.getElementById("result").innerText = "";
+  // document.getElementById("questionCount").innerText = "0";
+
+  restertGame();
+}
+
+function restertGame() {
+  document.getElementById("questionButton").onclick = setPlayingMode;
+
+  document.getElementById("questionButton").style.display = "block";
+  document.getElementById("questionButton").innerText = "スタート";
 }
 
 function setPlayingMode() {
@@ -87,6 +108,7 @@ function submitAnswer() {
   nextQuestion();
 }
 
+// TODO: もう一回ボタン押下時は、そのままスタートせずに最初の画面に戻るように変更予定
 function showResult() {
   document.querySelector(".question_set").style.display = "none";
 
@@ -96,11 +118,9 @@ function showResult() {
     document.getElementById("question").innerText =
       `終了！ ${gameState.score} / ${gameState.questions.length}`;
   }
+
+  document.getElementById("questionButton").onclick = resetGame;
+
   document.getElementById("questionButton").style.display = "block";
   document.getElementById("questionButton").innerText = "もう一回";
-  // リセット用の関数を別途作成予定
-  currentIndex = 0;
-  score = 0;
-  startFlag = 0;
-  questionCount = 0;
 }
