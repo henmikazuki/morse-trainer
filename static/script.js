@@ -10,7 +10,6 @@ let startFlag = 0;
 
 let totalCount = 0;
 
-// TODO: 既知の不具合。もう1度スタートするときに、正解数が持ち越されて表示されている。リセットできるように変更予定
 async function loadQuestion() {
   const res = await fetch("/api/start");
   const data = await res.json();
@@ -42,10 +41,10 @@ function resetGame() {
   document.getElementById("result").innerText = "";
   // document.getElementById("questionCount").innerText = "0";
 
-  restertGame();
+  restartGame();
 }
 
-function restertGame() {
+function restartGame() {
   document.getElementById("questionButton").onclick = setPlayingMode;
 
   document.getElementById("questionButton").style.display = "block";
@@ -108,7 +107,6 @@ function submitAnswer() {
   nextQuestion();
 }
 
-// TODO: もう一回ボタン押下時は、そのままスタートせずに最初の画面に戻るように変更予定
 function showResult() {
   document.querySelector(".question_set").style.display = "none";
 
