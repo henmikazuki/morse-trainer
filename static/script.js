@@ -31,6 +31,7 @@ async function loadQuestion() {
   document.querySelector(".question_set").style.display = "block";
   document.getElementById("questionButton").style.display = "none";
   document.getElementById("question").innerText = q.question;
+  document.getElementById("answer").focus();
   document.getElementById("questionCount").innerText =
     gameState.currentIndex + 1;
   document.getElementById("totalCount").innerText = totalCount;
