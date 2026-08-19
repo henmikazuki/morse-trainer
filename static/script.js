@@ -10,6 +10,11 @@ let startFlag = 0;
 
 let totalCount = 0;
 
+document.addEventListener("DOMContentLoaded", () => {
+  const ansButton = document.getElementById("ansButton");
+  ansButton.addEventListener("click", submitAnswer);
+});
+
 async function loadQuestion() {
   const res = await fetch("/api/start");
   const data = await res.json();
@@ -61,8 +66,6 @@ function setPlayingMode() {
 }
 
 function setResultMode() {
-  document.getElementById("ansButton").addEventListener("click", submitAnswer);
-
   document.getElementById("answer").addEventListener("keydown", (e) => {
     if (
       e.key === "Enter" &&
