@@ -10,8 +10,8 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/api/start")
-def start():
-    return {"questions": generate_quiz_set()}
+def start(mode: str):
+    return {"questions": generate_quiz_set(mode=mode)}
 
 
 @app.get("/", response_class=HTMLResponse)

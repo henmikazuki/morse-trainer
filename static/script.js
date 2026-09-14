@@ -16,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadQuestion() {
-  const res = await fetch("/api/start");
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  const res = await fetch(`/api/start?mode=${mode}`);
   const data = await res.json();
   gameState.questions = data.questions;
   totalCount = gameState.questions.length;
@@ -29,6 +30,7 @@ async function loadQuestion() {
 
   document.querySelector(".question_count_container").style.display = "block";
   document.querySelector(".question_set").style.display = "block";
+  document.getElementById("modeSelect").style.display = "none";
   document.getElementById("questionButton").style.display = "none";
   document.getElementById("question").innerText = q.question;
   document.getElementById("answer").focus();
@@ -54,6 +56,7 @@ function restartGame() {
   document.getElementById("questionButton").onclick = setPlayingMode;
 
   document.getElementById("questionButton").style.display = "block";
+  document.getElementById("modeSelect").style.display = "block";
   document.getElementById("questionButton").innerText = "スタート";
 }
 
